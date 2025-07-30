@@ -1,0 +1,40 @@
+<!DOCTYPE html><html lang="en"><head><title>Jungle Genius</title><meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/><link rel="stylesheet" href="/styles.css"/><meta name="description" content="Jungle Jenius, A fun math game for kids to play and teachers to teach"/><meta name="description" content="Jungle Jenius"/></head><body><main class="page-main p-6 mx-auto max-w-3xl"><a href="/vontive/resetData" class="text-black">Reset Data</a><br/><a href="/vontive/addData" class="text-black">Add Data</a><h1 class="page-title text-3xl font-bold mb-6">People</h1><script id="initial-data" type="application/json" nonce="7c58c38cdc1347949e831c4a588bf212">[{"ID":111,"firstName":"Nic","lastName":"Van der Werf","jobTitle":"Software Engineer","education":["Westminster"],"yearsAtVontive":0,"experience":["1440","Bleu World","Sea Trek BVI"]},{"ID":214,"firstName":"Lauren","lastName":"Dragas","education":["SLCC"],"jobTitle":"Environmental Scientist","yearsAtVontive":0,"experience":["Trails Utah CEO"]},{"ID":312,"firstName":"Shreyas","lastName":"Vijaykumar","jobTitle":"Co-Founder & CTO","education":["Stanford"],"yearsAtVontive":7,"experience":["Microsoft","Palantir Technologies","Vontive"]},{"ID":489,"firstName":"Charles","lastName":"MnKinney","jobTitle":"CEO","education":["University at Albany","University of Maryland"],"yearsAtVontive":8,"experience":["SecureIT","Freddie Mac","Ten-X","Family Office","Startup Advisor","Co-Founder","CEO","Vontive"]},{"ID":745,"firstName":"Ajit","lastName":"Bhat","jobTitle":"Full Stack Engineer","education":["AMC Engineering College”, “University at Buffalo"],"yearsAtVontive":1,"experience":["Leanovate","table.ai","Perpetua","Vontive"]},{"ID":817,"firstName":"Harrison","lastName":"Dimmig","jobTitle":"Full Stack Engineer","education":["Northeastern University"],"yearsAtVontive":7,"experience":["Philips Ultrasound","Allen Medical Systems","O2X Human Performance","Vontive"]},{"ID":901,"firstName":"Zach","lastName":"Loubier","jobTitle":"Software Engineer","education":["Babson College"],"yearsAtVontive":3,"experience":["Babson College","Trellis Inc","Betabrand","Vontive"]},{"ID":942,"firstName":"Karan","lastName":"Bhatia","jobTitle":"Tech Lead Manager","education":["University of Toronto"],"yearsAtVontive":6,"experience":["Bell","SAP","Amazon","Salesforce","Vontive"]}]</script><div id="engineer-list" class="engineer-list"></div><script nonce="7c58c38cdc1347949e831c4a588bf212">
+(function() {
+  const engineers = JSON.parse(
+    document.getElementById("initial-data").textContent
+  );
+  const container = document.getElementById("engineer-list");
+
+  engineers.forEach(e => {
+    container.innerHTML += `
+<details class="engineer-section mb-4 border rounded-lg" data-engineer-id="${e.ID}">
+  <summary class="engineer-name p-4 cursor-pointer text-xl font-semibold">
+    ${e.firstName} ${e.lastName}
+    <span class="engineer-id" hidden>${e.ID}</span>
+  </summary>
+  <div class="engineer-details p-4 border-t">
+    <p class="engineer-years mb-3">
+      <strong>Years at Vontive:</strong>
+      <span class="engineer-years-value">${e.yearsAtVontive}</span>
+    </p>
+    <div class="engineer-education mb-3">
+      <strong>Education:</strong>
+      <ul class="engineer-education-list list-disc list-inside ml-4">
+        ${e.education.map(s => `<li class="engineer-education-item">${s}</li>`).join("")}
+      </ul>
+    </div>
+    <div class="engineer-experience">
+      <strong>Experience:</strong>
+      <ul class="engineer-experience-list list-disc list-inside ml-4">
+        ${e.experience.map(x => `<li class="engineer-experience-item">${x}</li>`).join("")}
+      </ul>
+    </div>
+    <p class="engineer-jobTitle mt-3">
+      <strong>Job Title:</strong>
+      <span class="engineer-jobTitle-value">${e.jobTitle}</span>
+    </p>
+  </div>
+</details>`;
+  });
+})();
+</script></main></body></html>

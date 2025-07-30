@@ -1,5 +1,5 @@
 (async function() {
-  // 1️⃣ collect all IDs
+
   const sections = document.querySelectorAll(".engineer-section");
   const ids = Array.from(sections)
     .map(el => el.getAttribute("data-engineer-id"))
@@ -10,7 +10,6 @@
     return;
   }
 
-  // 2️⃣ fetch each engineer’s JSON
   const engineers = await Promise.all(ids.map(id =>
     fetch(`/vontive/getEngineerProtected?id=${id}`)
       .then(res => {
@@ -19,11 +18,9 @@
       })
   ));
 
-  // 3️⃣ build CSV text
+
   const headers = [
-    "ID",
-    "firstName",
-    "lastName",
+    "Name",
     "jobTitle",
     "education",
     "yearsAtVontive",
@@ -34,9 +31,7 @@
     `"${String(str).replace(/"/g, '""')}"`;
 
   const rows = engineers.map(e => [
-    escape(e.ID),
-    escape(e.firstName),
-    escape(e.lastName),
+    escape(e.firstName) + " " + escape(e.lastName),
     escape(e.jobTitle),
     escape((e.education || []).join(";")),
     escape(e.yearsAtVontive),
@@ -45,7 +40,6 @@
 
   const csv = headers.join(",") + "\n" + rows.join("\n");
 
-  // 4️⃣ trigger download
   const blob = new Blob([csv], { type: "text/csv" });
   const url = URL.createObjectURL(blob);
   const a = document.createElement("a");
